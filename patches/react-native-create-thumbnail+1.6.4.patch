@@ -1,0 +1,17 @@
+diff --git a/node_modules/react-native-create-thumbnail/android/src/main/java/com/createthumbnail/CreateThumbnailModule.java b/node_modules/react-native-create-thumbnail/android/src/main/java/com/createthumbnail/CreateThumbnailModule.java
+index 9bd67d8..8f14cce 100644
+--- a/node_modules/react-native-create-thumbnail/android/src/main/java/com/createthumbnail/CreateThumbnailModule.java
++++ b/node_modules/react-native-create-thumbnail/android/src/main/java/com/createthumbnail/CreateThumbnailModule.java
+@@ -189,7 +189,11 @@ public class CreateThumbnailModule extends ReactContextBaseJavaModule {
+         }
+   
+         Bitmap image = retriever.getFrameAtTime(time * 1000, MediaMetadataRetriever.OPTION_CLOSEST_SYNC);
+-        retriever.release();
++        try {
++            retriever.release();
++        } catch(IOException e) {
++            e.printStackTrace();
++        }
+         if (image == null) {
+             throw new IllegalStateException("File doesn't exist or not supported");
+         }
